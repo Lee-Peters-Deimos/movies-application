@@ -5,6 +5,7 @@
     <title>My Application</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -14,33 +15,31 @@
             <div class="modal-header">
                 Add Your Movie
             </div>
-            <div class="modal-body">
-                <form>
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="addTitle">Title</label>
                         <input type="text" class="form-control" id="addTitle" placeholder="Enter Title Here" autocomplete="off">
                     </div>
-                    <div class="form-group">
-                        <label for="addRating">Rating</label>
-                        <input type="text" class="form-control" id="addRating" placeholder="Enter Rating Here" autocomplete="off">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio-rating" id="radio1" value="option1">
+                        <label class="form-check-label" for="radio1">1</label>
                     </div>
-                    <div class="form-group">
-                        <label for="addGenre">Genre</label>
-                        <input type="text" class="form-control" id="addGenre" placeholder="Enter Genre Here" autocomplete="off">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio-rating" id="radio2" value="option2">
+                        <label class="form-check-label" for="radio1">2</label>
                     </div>
-                    <div class="form-group">
-                        <label for="addRelease">Release Date</label>
-                        <input type="text" class="form-control" id="addRelease" placeholder="Enter Release Date Here (Ex: April 20, 1969)" autocomplete="off">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio-rating" id="radio3" value="option3">
+                        <label class="form-check-label" for="radio1">3</label>
                     </div>
-                    <div class="form-group">
-                        <label for="addDirector">Director</label>
-                        <input type="text" class="form-control" id="addDirector" placeholder="Enter Director Here" autocomplete="off">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio-rating" id="radio4" value="option4">
+                        <label class="form-check-label" for="radio1">4</label>
                     </div>
-                    <div class="form-group">
-                        <label for="addRuntime">Runtime</label>
-                        <input type="text" class="form-control" id="addRuntime" placeholder="Enter Runtime Here" autocomplete="off">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radio-rating" id="radio5" value="option5">
+                        <label class="form-check-label" for="radio1">5</label>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -49,6 +48,47 @@
         </div>
     </div>
 </div>
+<!--<div class="modal fade addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                Add Your Movie-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <form>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="addTitle">Title</label>-->
+<!--                        <input type="text" class="form-control" id="addTitle" placeholder="Enter Title Here" autocomplete="off">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="addRating">Rating</label>-->
+<!--                        <input type="text" class="form-control" id="addRating" placeholder="Enter Rating Here" autocomplete="off">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="addGenre">Genre</label>-->
+<!--                        <input type="text" class="form-control" id="addGenre" placeholder="Enter Genre Here" autocomplete="off">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="addRelease">Release Date</label>-->
+<!--                        <input type="text" class="form-control" id="addRelease" placeholder="Enter Release Date Here (Ex: April 20, 1969)" autocomplete="off">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="addDirector">Director</label>-->
+<!--                        <input type="text" class="form-control" id="addDirector" placeholder="Enter Director Here" autocomplete="off">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="addRuntime">Runtime</label>-->
+<!--                        <input type="text" class="form-control" id="addRuntime" placeholder="Enter Runtime Here" autocomplete="off">-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+<!--                <button type="button" class="submitAdd btn btn-success">Submit Movie</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 
 <div class="jumbotron jumbotron-fluid row">
