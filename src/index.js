@@ -148,7 +148,7 @@ $('.submitEdit').click(function () {
             title: $('#editTitle').val(),
             rating: $('#editRating').val(),
             id: $('.editId').text(),
-            image: "https://image.tmdb.org/t/p/original" + $('.editImage').text(),
+            image: $('.editImage').text(),
             genre: $('#editGenre').val(),
             director: $('#editDirector').val(),
             date: $('#editRelease').val(),

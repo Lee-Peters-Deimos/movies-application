@@ -121,14 +121,14 @@
       "duration": "119 minutes"
     },
     {
-      "title": "300",
-      "rating": "2",
-      "id": 13,
-      "image": "https://image.tmdb.org/t/p/original/bYR8O1H1ZlME7Dm9ysfTYZnRDpw.jpg",
+      "title": "Independence Day",
+      "id": 14,
+      "image": "https://image.tmdb.org/t/p/original/bqLlWZJdhrS0knfEJRkquW7L8z2.jpg",
       "genre": "Action",
-      "director": "Zack Snyder",
-      "date": "March 07, 2007",
-      "duration": "117 minutes"
+      "director": "Roland Emmerich",
+      "date": "June 25, 1996",
+      "duration": "145 minutes",
+      "rating": "3"
     }
   ]
 }
