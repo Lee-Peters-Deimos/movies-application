@@ -122,13 +122,13 @@
     },
     {
       "title": "300",
-      "rating": "3",
+      "rating": "2",
       "id": 13,
       "image": "https://image.tmdb.org/t/p/original/bYR8O1H1ZlME7Dm9ysfTYZnRDpw.jpg",
       "genre": "Action",
       "director": "Zack Snyder",
       "date": "March 07, 2007",
-      "duration": "117minutes"
+      "duration": "117 minutes"
     }
   ]
 }
