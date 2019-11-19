@@ -7,7 +7,7 @@
       "image": "img/casablanca.jpg",
       "genre": "Romance",
       "director": "Michael Curtiz",
-      "date": "November 26, 1942",
+      "date": "November 26, 1967",
       "duration": "102 minutes"
     },
     {
@@ -59,7 +59,8 @@
       "director": "George Lucas",
       "date": "May 19, 2005",
       "duration": "140 minutes"
-    },{
+    },
+    {
       "title": "It",
       "rating": "4",
       "id": 7,
@@ -118,6 +119,16 @@
       "director": "Jake Kasdan",
       "date": "December 11, 2017",
       "duration": "119 minutes"
+    },
+    {
+      "title": "300",
+      "rating": "3",
+      "id": 13,
+      "image": "https://image.tmdb.org/t/p/original/bYR8O1H1ZlME7Dm9ysfTYZnRDpw.jpg",
+      "genre": "Action",
+      "director": "Zack Snyder",
+      "date": "March 07, 2007",
+      "duration": "117minutes"
     }
   ]
 }
