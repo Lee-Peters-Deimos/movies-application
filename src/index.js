@@ -53,7 +53,7 @@ $(".submitAdd").click(function () {
         poster = movie.results[0].poster_path;
         movieId = movie.results[0].id;
     }).then(function () {
-        fetch('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=fa451fae68a99b5a7395924b21e6394e')
+      fetch('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=fa451fae68a99b5a7395924b21e6394e')
             .then(response => response.json()).then((movie) => {
             addGenre = movie.genres[0].name;
             addRuntime = movie.runtime;
@@ -119,12 +119,9 @@ $(".submitAdd").click(function () {
                             });
                         });
                 });
-
-
         });
     });
 });
-
 $(document).on("click", '.editButton', function () {
     let id = $(this).attr('id');
     return fetch('/api/movies/' + id)
