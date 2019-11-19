@@ -26,7 +26,7 @@ getMovies().then((movies) => {
             '<li class="list-group-item">Run Time: ' + duration + '</li></ul></div>' +
             '<div class="card-footer justify-content-around d-flex">' +
             '<button type="button" class="editButton btn btn-warning" id="' + id + '" data-toggle="modal" data-target=".editModal">Edit</button>' +
-            '<button type="button" class="deleteButton btn btn-danger">Delete</button></div></div></div>');
+            '<button type="button" class="deleteButton btn btn-danger" id="' + id + '" data-toggle="modal" data-target=".deleteModal">Delete</button></div></div></div>');
         $('.loader').css('visibility', 'hidden');
         allMovies.push(movieCards);
         $('.movieList').append(movieCards);
@@ -72,25 +72,6 @@ $(".submitAdd").click(function () {
                 }
 
 
-            }).then(() => {
-                let newMovieCard = ('' +
-                    '<div class="card col-3 card-flip h-100">' +
-                      '<div class="card-front">' +
-                        '<img src="https://image.tmdb.org/t/p/original' + poster + '" class="poster"></div>' +
-                      '<div class="card-back d-flex justify-content-center flex-column">' +
-                        '<div class="card-body">' +
-                          '<h5 class="card-title">' + addTitle + '</h5>' +
-                          '<ul class="list-group list-group-flush">' +
-                            '<li class="list-group-item">Rating: ' + addRating + '</li>' +
-                            '<li class="list-group-item">Genre: ' + addGenre + '</li>' +
-                            '<li class="list-group-item">Director: ' + addDirector + '</li>' +
-                            '<li class="list-group-item">Release: ' + addRelease + '</li>' +
-                            '<li class="list-group-item">Run Time: ' + addRuntime + '  minutes' + '</li></ul></div>' +
-                        '<div class="card-footer justify-content-around d-flex">' +
-                          '<button type="button" class="editButton btn btn-warning" id=' + globalID + '" data-toggle="modal" data-target=".editModal">Edit</button>' +
-                          '<button type="button" class="deleteButton btn btn-danger">Delete</button></div></div></div>');
-                $('.movieList').append(newMovieCard);
-                allMovies.push(newMovieCard);
             })
                 .then(() => {
                     const movie = {
@@ -101,7 +82,7 @@ $(".submitAdd").click(function () {
                         genre: addGenre,
                         director: addDirector,
                         date: addRelease,
-                        duration: addRuntime + "minutes"
+                        duration: addRuntime + " minutes"
                     };
                     const url = '/api/movies';
                     const options = {
@@ -112,8 +93,31 @@ $(".submitAdd").click(function () {
                         body: JSON.stringify(movie),
                     };
                     fetch(url, options)
-                        .then(() => console.log("something"))
-                        .catch(() => console.log("nothing"));
+                        .then(() => {
+                            $('.movieList').empty();
+                            $('.loader').css('visibility', 'visible');
+                            getMovies().then((movies) => {
+                                movies.forEach(({title, rating, id, image, genre, director, date, duration}) => {
+                                    let movieCards = ('<div class="card col-3 card-flip h-100">' +
+                                        '<div class="card-front">' +
+                                        '<img src="' + image + '" class="poster"></div>' +
+                                        '<div class="card-back d-flex justify-content-center flex-column">' +
+                                        '<div class="card-body">' +
+                                        '<h5 class="card-title">' + title + '</h5>' +
+                                        '<ul class="list-group list-group-flush">' +
+                                        '<li class="list-group-item">Rating: ' + rating + '</li>' +
+                                        '<li class="list-group-item">Genre: ' + genre + '</li>' +
+                                        '<li class="list-group-item">Director: ' + director + '</li>' +
+                                        '<li class="list-group-item">Release: ' + date + '</li>' +
+                                        '<li class="list-group-item">Run Time: ' + duration + '</li></ul></div>' +
+                                        '<div class="card-footer justify-content-around d-flex">' +
+                                        '<button type="button" class="editButton btn btn-warning" id="' + id + '" data-toggle="modal" data-target=".editModal">Edit</button>' +
+                                        '<button type="button" class="deleteButton btn btn-danger" id="' + id + '" data-toggle="modal" data-target=".deleteModal">Delete</button></div></div></div>');
+                                    $('.loader').css('visibility', 'hidden');
+                                    $('.movieList').append(movieCards);
+                                });
+                            });
+                        });
                 });
 
 
@@ -124,60 +128,124 @@ $(".submitAdd").click(function () {
 $(document).on("click", '.editButton', function () {
     let id = $(this).attr('id');
     return fetch('/api/movies/' + id)
-      .then(response => response.json()).then((movie) => {
-        $('#editTitle').val(movie.title);
-        $('#editRating').val(movie.rating);
-        $('#editGenre').val(movie.genre);
-        $('#editRelease').val(movie.date);
-        $('#editDirector').val(movie.director);
-        $('#editRuntime').val(movie.duration);
-        $('.editId').text(movie.id);
-        $('.editImage').text(movie.image);
+        .then(response => response.json()).then((movie) => {
+            $('#editTitle').val(movie.title);
+            $('#editRating').val(movie.rating);
+            $('#editGenre').val(movie.genre);
+            $('#editRelease').val(movie.date);
+            $('#editDirector').val(movie.director);
+            $('#editRuntime').val(movie.duration);
+            $('.editId').text(movie.id);
+            $('.editImage').text(movie.image);
         });
 });
 
-$('.submitEdit').click(function(){
-  $('.editModal').modal('hide');
-  let movie = {};
-  if($('.editId').text() > 12) {
-    movie = {
-      title: $('#editTitle').val(),
-      rating: $('#editRating').val(),
-      id: $('.editId').text(),
-      image: "https://image.tmdb.org/t/p/original" + $('.editImage').text(),
-      genre: $('#editGenre').val(),
-      director: $('#editDirector').val(),
-      date: $('#editRelease').val(),
-      duration: $('#editRuntime').val()
+$('.submitEdit').click(function () {
+    $('.editModal').modal('hide');
+    let movie = {};
+    if ($('.editId').text() > 12) {
+        movie = {
+            title: $('#editTitle').val(),
+            rating: $('#editRating').val(),
+            id: $('.editId').text(),
+            image: "https://image.tmdb.org/t/p/original" + $('.editImage').text(),
+            genre: $('#editGenre').val(),
+            director: $('#editDirector').val(),
+            date: $('#editRelease').val(),
+            duration: $('#editRuntime').val()
+        };
+    } else {
+        movie = {
+            title: $('#editTitle').val(),
+            rating: $('#editRating').val(),
+            id: $('.editId').text(),
+            image: $('.editImage').text(),
+            genre: $('#editGenre').val(),
+            director: $('#editDirector').val(),
+            date: $('#editRelease').val(),
+            duration: $('#editRuntime').val()
+        };
+    }
+    const url = '/api/movies/' + $('.editId').text();
+    const options = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(movie),
     };
-  }
-  else {
-    movie = {
-      title: $('#editTitle').val(),
-      rating: $('#editRating').val(),
-      id: $('.editId').text(),
-      image: $('.editImage').text(),
-      genre: $('#editGenre').val(),
-      director: $('#editDirector').val(),
-      date: $('#editRelease').val(),
-      duration: $('#editRuntime').val()
-    };
-  }
-  console.log($('.editId').text());
-  const url = '/api/movies/' + $('.editId').text();
-  const options = {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(movie),
-  };
-  fetch(url, options)
-      .then(() => {console.log("something")})
-      .catch(() => console.log("Failed"));
-}).then(() => );
+    fetch(url, options)
+        .then(() => {
+            $('.movieList').empty();
+            $('.loader').css('visibility', 'visible');
+            getMovies().then((movies) => {
+                movies.forEach(({title, rating, id, image, genre, director, date, duration}) => {
+                    let movieCards = ('<div class="card col-3 card-flip h-100">' +
+                        '<div class="card-front">' +
+                        '<img src="' + image + '" class="poster"></div>' +
+                        '<div class="card-back d-flex justify-content-center flex-column">' +
+                        '<div class="card-body">' +
+                        '<h5 class="card-title">' + title + '</h5>' +
+                        '<ul class="list-group list-group-flush">' +
+                        '<li class="list-group-item">Rating: ' + rating + '</li>' +
+                        '<li class="list-group-item">Genre: ' + genre + '</li>' +
+                        '<li class="list-group-item">Director: ' + director + '</li>' +
+                        '<li class="list-group-item">Release: ' + date + '</li>' +
+                        '<li class="list-group-item">Run Time: ' + duration + '</li></ul></div>' +
+                        '<div class="card-footer justify-content-around d-flex">' +
+                        '<button type="button" class="editButton btn btn-warning" id="' + id + '" data-toggle="modal" data-target=".editModal">Edit</button>' +
+                        '<button type="button" class="deleteButton btn btn-danger" id="' + id + '" data-toggle="modal" data-target=".deleteModal">Delete</button></div></div></div>');
+                    $('.loader').css('visibility', 'hidden');
+                    $('.movieList').append(movieCards);
+                });
+            });
+        });
+});
 
-$()
+$(document).on("click", '.deleteButton', function () {
+    let id = $(this).attr('id');
+    $('.deleteId').text(id);
+});
+
+
+$('.submitDelete').click(function () {
+    $('.deleteModal').modal('hide');
+    let id = $('.deleteId').text();
+    console.log(id);
+    const options = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+    fetch('api/movies/' + id, options)
+        .then(() => {
+            $('.movieList').empty();
+            $('.loader').css('visibility', 'visible');
+            getMovies().then((movies) => {
+                movies.forEach(({title, rating, id, image, genre, director, date, duration}) => {
+                    let movieCards = ('<div class="card col-3 card-flip h-100">' +
+                        '<div class="card-front">' +
+                        '<img src="' + image + '" class="poster"></div>' +
+                        '<div class="card-back d-flex justify-content-center flex-column">' +
+                        '<div class="card-body">' +
+                        '<h5 class="card-title">' + title + '</h5>' +
+                        '<ul class="list-group list-group-flush">' +
+                        '<li class="list-group-item">Rating: ' + rating + '</li>' +
+                        '<li class="list-group-item">Genre: ' + genre + '</li>' +
+                        '<li class="list-group-item">Director: ' + director + '</li>' +
+                        '<li class="list-group-item">Release: ' + date + '</li>' +
+                        '<li class="list-group-item">Run Time: ' + duration + '</li></ul></div>' +
+                        '<div class="card-footer justify-content-around d-flex">' +
+                        '<button type="button" class="editButton btn btn-warning" id="' + id + '" data-toggle="modal" data-target=".editModal">Edit</button>' +
+                        '<button type="button" class="deleteButton btn btn-danger" id="' + id + '" data-toggle="modal" data-target=".deleteModal">Delete</button></div></div></div>');
+                    $('.loader').css('visibility', 'hidden');
+                    $('.movieList').append(movieCards);
+                });
+            });
+        });
+});
+
 
 
 
